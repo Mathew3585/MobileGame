@@ -36,7 +36,7 @@ public class Damageable : MonoBehaviour
         {
             _health = value;
 
-            if (_health < 0)
+            if (_health <= 0)
             {
                 IsAlive = false;
             }
@@ -82,15 +82,16 @@ public class Damageable : MonoBehaviour
             }
             timeSinvceHit += Time.deltaTime;
         }
-        Hit(Damage);
     }
 
-    public void Hit(int damage)
+    public bool Hit(int damage, Vector2 Knockback)
     {
         if(IsAlive && !IsInvicible)
         {
             Health -= damage;
             IsInvicible = true;
+            return true;
         }
-    }
+        return false;
+    }   
 }
